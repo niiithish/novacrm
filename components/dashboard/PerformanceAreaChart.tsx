@@ -161,26 +161,13 @@ export function PerformanceAreaChart({ data, chartType, onChartTypeChange }: Per
                 trend={{ value: "8", positive: true, label: "vs last month" }}
                 className="flex-1"
               />
-            </div>
-
-            {/* Chart Type Toggle */}
-            <div className="flex justify-end gap-2">
-              <Toggle
-                pressed={chartType === 'line'}
-                onPressedChange={() => onChartTypeChange('line')}
-                aria-label="Toggle line chart"
-                size="sm"
-              >
-                Line
-              </Toggle>
-              <Toggle
-                pressed={chartType === 'bar'}
-                onPressedChange={() => onChartTypeChange('bar')}
-                aria-label="Toggle bar chart"
-                size="sm"
-              >
-                Bar
-              </Toggle>
+              <KPICard
+                title="Leads Count"
+                value={mockKPIData.leadsCount}
+                format="number"
+                trend={{ value: "8", positive: true, label: "vs last month" }}
+                className="flex-1"
+              />
             </div>
           </div>
 
@@ -190,28 +177,49 @@ export function PerformanceAreaChart({ data, chartType, onChartTypeChange }: Per
         <div className="px-2 pb-6 sm:px-6">
           {/* Combined Filter + Legend */}
           <div className="mb-4 space-y-2 text-sm">
-            <div className="flex flex-wrap items-center gap-2">
-              {filterOptions.map((option) => (
-                <Button
-                  key={option.key}
-                  variant={isOptionActive(option.key) ? 'default' : 'outline'}
+            <div className="flex flex-wrap items-center gap-2 justify-between">
+              <div className="flex flex-wrap items-center gap-2">
+                {filterOptions.map((option) => (
+                  <Button
+                    key={option.key}
+                    variant={isOptionActive(option.key) ? 'default' : 'outline'}
+                    size="sm"
+                    onClick={() => handleFilterToggle(option.key)}
+                    className="flex items-center gap-2 cursor-pointer"
+                  >
+                    {option.key === 'all' ? (
+                      <span className="flex h-3 w-3 items-center justify-center">
+                        <span className="h-2 w-2 rounded-full bg-foreground/70" />
+                      </span>
+                    ) : (
+                      <span
+                        className="h-3 w-3 rounded-full"
+                        style={{ backgroundColor: option.color }}
+                      />
+                    )}
+                    <span>{option.label}</span>
+                  </Button>
+                ))}
+              </div>
+              {/* Chart Type Toggle */}
+              <div className="flex justify-end gap-2">
+                <Toggle
+                  pressed={chartType === 'line'}
+                  onPressedChange={() => onChartTypeChange('line')}
+                  aria-label="Toggle line chart"
                   size="sm"
-                  onClick={() => handleFilterToggle(option.key)}
-                  className="flex items-center gap-2 cursor-pointer"
                 >
-                  {option.key === 'all' ? (
-                    <span className="flex h-3 w-3 items-center justify-center">
-                      <span className="h-2 w-2 rounded-full bg-foreground/70" />
-                    </span>
-                  ) : (
-                    <span
-                      className="h-3 w-3 rounded-full"
-                      style={{ backgroundColor: option.color }}
-                    />
-                  )}
-                  <span>{option.label}</span>
-                </Button>
-              ))}
+                  Line
+                </Toggle>
+                <Toggle
+                  pressed={chartType === 'bar'}
+                  onPressedChange={() => onChartTypeChange('bar')}
+                  aria-label="Toggle bar chart"
+                  size="sm"
+                >
+                  Bar
+                </Toggle>
+              </div>
             </div>
           </div>
           <div className="h-80 w-full max-w-full overflow-hidden">

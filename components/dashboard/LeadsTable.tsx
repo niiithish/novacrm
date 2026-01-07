@@ -56,7 +56,7 @@ export function LeadsTable({ leads, leadsCount }: LeadsTableProps) {
   return (
     <Card className="w-full max-w-full overflow-hidden">
       <CardHeader className="pb-0">
-        <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <CardTitle className="text-lg">Recent Leads</CardTitle>
             <Badge variant="secondary" className="text-sm">
@@ -98,7 +98,7 @@ export function LeadsTable({ leads, leadsCount }: LeadsTableProps) {
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="h-8 px-3 text-xs text-primary hover:text-primary"
+                      className="text-xs text-primary hover:text-primary"
                     >
                       View
                     </Button>
@@ -162,8 +162,8 @@ export function LeadsTable({ leads, leadsCount }: LeadsTableProps) {
           </div>
         </div>
       </CardContent>
-      <CardFooter className="justify-center px-4 pb-4 pt-2 md:pt-4">
-        <Button variant="ghost" size="sm" asChild className="h-8 rounded-full px-3 text-primary hover:text-primary">
+      <CardFooter className="justify-end">
+        <Button variant="default" size="sm">
           <Link href="/deals">View all</Link>
         </Button>
       </CardFooter>
